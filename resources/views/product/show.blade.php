@@ -23,6 +23,8 @@
             <input type="hidden" name="id" value="{{ $prod->id}}">
             <input type="hidden" name="nome" value="{{ $prod->nome}}">
             <input type="hidden" name="preco" value="{{ $prod->preco}}">
+            <input type="hidden" name="image" value="{{ $prod->image}}">
+            <input type="number" name="qtd">
         </form>
     </div>
 @endsection

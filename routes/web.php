@@ -50,6 +50,9 @@ Route::group([
         Route::get('/category/{category}', [ProdutoController::class, 'productsByCategory'])->name('category');
         Route::get('/cart', [CarrinhoController::class, 'cartList'])->name('cart');
         Route::post('/cart', [CarrinhoController::class, 'addCart'])->name('add-cart');
+        Route::delete('/cart/delete/{id}', [CarrinhoController::class, 'delete'])->name('delete-cart');
+        Route::delete('/cart/clear', [CarrinhoController::class, 'clear'])->name('clear-cart');
+        Route::put('/cart/update/{id}', [CarrinhoController::class, 'update'])->name('update-cart');
 });
 
 Route::get('/', [SiteController::class, 'index']);

@@ -52,7 +52,14 @@ class CarrinhoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        \Cart::update($id, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->qtd
+            ),
+          ));
+
+        return redirect()->route('product.cart');
     }
 
     /**
@@ -74,9 +81,25 @@ class CarrinhoController extends Controller
             'id' => $request->id,
             'name' => $request->nome,
             'price' => $request->preco,
-            'quantity' => 10
+            'quantity' => $request->qtd,
+            'attributes' => array(
+                'img' => $request->image
+            )
         ]);
 
         return redirect()->route('product.index');
+    }
+
+    public function delete(string $id) {
+        $item = \Cart::get($id);
+        $deleted = \Cart::remove($id);
+        
+        return redirect()->route('product.cart')->with(compact('item', 'deleted'));
+    }
+
+    public function clear() {
+        \Cart::clear();
+
+        return redirect()->route('product.cart');
     }
 }
